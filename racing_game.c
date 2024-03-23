@@ -1,243 +1,448 @@
 #include <stdio.h>
-void green()
-{
-    printf("\033[0;32m");
-}
-void white()
-{
-    printf("\033[0;37m");
-}
-void yellow()
-{
-    printf("\033[0;33m");
-}
-void cyan()
-{
-    printf("\033[0;36m");
-}
+#include <stdlib.h>
+#include <time.h>
+#define ROW 15
+#define COLUMN 30
+char array[ROW][COLUMN];
 void red()
 {
- printf("\033[0;31m");
+    printf("\033[1;31m");
 }
 void reset()
 {
-printf("\033[0m");
+    printf("\033[0m");
 }
-void cordinat_plane(int a,int b,int c)
+void yellow()
 {
-int x,y;
-for(y=15;y <= -15;y--)
-{
-  for(x=-55 ;x < 55;x++)  
-{
-    if(x == (a*y*y) + b*y + c )
-                   {
-                  printf("#");
-                    }
-    else if (x == 0)                    
-                  {
-                  printf("|"); 
-                  }
-    else             
-              {
-                  printf(y == 0 ? "-" : " ");
-                }   
-   }
-       printf("\n");
+    printf("\033[1;33m");
 }
+void green()
+{
+    printf("\033[1;32m");
+}
+void purple()
+{
+    printf("\033[1;35m");
+}
+void printMap(int x1c,int x1r,int x2c,int x2r)
+{
 
-}
+    int i, j;
+    for (i = 0; i < ROW; i++)
+    {
+        for (j = 0; j < COLUMN; j++)
+        {
+            if (i == x1r && j == x1c)
+                array[i][j] = '1';
+            else if (i == x2r && j == x2c)
+                array[i][j] = '2';
+            else if (j == 0)
+                array[i][j] = '|';    
+            else if (i == 2 && j == 1)
+                array[i][j] = '*';
+            else if (i == 4 && j == 3)
+                array[i][j] = '*';
+            else if (j == 29)
+                array[i][j] = '|';
+            else if (i == 0)
+                array[i][j] = '-';
+            else if (i == 14)
+                array[i][j] = '-';
+            else if (i == 1 && j == 14)
+                array[i][j] = 'X';
+            else if (i == 7 && j == 28)
+                array[i][j] = 'X';
+            else if (i == 13 && j == 14)
+                array[i][j] = 'X';
+            else if (i == 3 && j == 10)
+                array[i][j] = 'X';
+            else if (i == 3 && j == 18)
+                array[i][j] = 'X';
+            else if (i == 5 && j == 26)
+                array[i][j] = 'X';
+            else if (i == 10 && j == 26)
+                array[i][j] = 'X';
+            else if (i == 11 && j == 10)
+                array[i][j] = 'X';
+            else if (i == 11 && j == 18)
+                array[i][j] = 'X';
+            else if (i == 4 && j > 4 && j < 25)
+                array[i][j] = '-';
+            else if (i == 12 && j > 4 && j < 25)
+                array[i][j] = '-';
+            else if (i == 10 && j > 4 && j < 25)
+                array[i][j] = '-';
+            else if (i == 2 && j > 2 && j < 27)
+                array[i][j] = '-';
+            else if (i == 12 && j > 2 && j < 27)
+                array[i][j] = '-';
+            else if (j == 4 && i > 3 && i < 11)
+                array[i][j] = '|';
+            else if (j == 25 && i > 3 && i < 11)
+                array[i][j] = '|';
+            else if (j == 2 && i > 1 && i < 13)
+                array[i][j] = '|';
+            else if (j == 27 && i > 1 && i < 13)
+                array[i][j] = '|';
+            else
+                array[i][j] = ' ';
+        }
 
+    }
+    for (i = 0; i < ROW; i++)
+    {
+        for (j = 0; j < COLUMN; j++)
+        {
+            if(i==x1r && j==x1c)  //Prints uptade coordinates for Player 1
+         {
+            green();
+            printf("%c",array[i][j]);
+            reset();
+         }
+            else if(j==x2r && j==x2c)  //Prints uptade coordinates for Player 2
+           {
+            yellow();
+            printf("%c",array[i][j]);
+            reset();
+          }
+            else if (i == 1 && j == 14)
+            {
+                red();
+                printf("%c", array[i][j]);
+                reset();
+            }
+            else if (i == 7 && j == 28)
+            {
+                red();
+                printf("%c", array[i][j]);
+                reset();
+            }
+            else if (i == 13 && j == 14)
+            {
+                red();
+                printf("%c", array[i][j]);
+                reset();
+            }
+            else if (i == 3 && j == 10)
+            {
+                red();
+                printf("%c", array[i][j]);
+                reset();
+            }
+            else if (i == 3 && j == 18)
+            {
+                red();
+                printf("%c", array[i][j]);
+                reset();
+            }
+            else if (i == 5 && j == 26)
+            {
+                red();
+                printf("%c", array[i][j]);
+                reset();
+            }
+            else if (i == 10 && j == 26)
+            {
+                red();
+                printf("%c", array[i][j]);
+                reset();
+            }
+            else if (i == 11 && j == 10)
+            {
+                red();
+                printf("%c", array[i][j]);
+                reset();
+            }
+            else if (i == 11 && j == 18)
+            {
+                red();
+                printf("%c", array[i][j]);
+                reset();
+            }
+            else if (i == 2 && j == 1)
+            {
+                purple();
+                printf("%c", array[i][j]);
+                reset();
+            }
+            else if (i == 4 && j == 3)
+            {
+                purple();
+                printf("%c", array[i][j]);
+                reset();
+            }
+            else
+                printf("%c", array[i][j]);
+        }
+        printf("\n");
+    }
+}
+int dice()
+{
+    return 1 + rand() % 6;
+}
+int startGame()
+{
+    int x1,x2;
+    printf("To start to game,players should dice who is going to start first according to it...\n");
+    green();
+    printf("Player 1... press ENTER to dice");
+    reset();
+    while( getchar() != '\n' );
+    x1 = dice();
+    green();
+    printf("DICE: %d",x1);
+    reset();
+    yellow();
+    printf("\nPlayer 2... press ENTER to dice");
+    reset();
+    while( getchar() != '\n' );
+    x2 = dice();
+    yellow();
+    printf("DICE: %d\n",x2);
+    reset();
+    if(x1 > x2)
+        return 1;
+    else if(x2 > x1)
+        return 2;
+    else
+        return 0;
+}
 int main()
 {
-int choice;
-do
-{
-
-printf("\nSelect an operation\n");
-printf("1 -> Enter the coefficients\n");
-printf("2 -> Draw the graph.\n");
-printf("3 -> Printf the graph into a .txt file.\n");
-printf("4 -> Exit.\n");
-printf("Choice: ");
-scanf("%d",&choice);
-printf("\n");
-if(choice == 1)
-{
-    int a,b,c;
-    printf("Please enter the coefficient for the following equation: x=a(y*y) + b*y+ c\n");
-    printf("a: ");
-    scanf("%d",&a);
-    printf("b: ");
-    scanf("%d",&b);
-    printf("c: ");
-    scanf("%d",&c);
-    FILE *fp;
-    fp=fopen("coefficients.txt","w+");
-    fprintf(fp,"%d\n%d\n%d\n",a,b,c);
-    fclose(fp);
-    printf("\n");
-    printf("coefficients.txt file has been created.\n\n");
-}
-if(choice == 2)
-{
-int x,y,a,b,c;
-FILE *fp = fopen("coefficients.txt","r+");
-if(fp == NULL)
-{
-printf("File could not found\n");
-return 0;
-}
-fscanf(fp,"%d %d %d ",&a,&b,&c);
-fclose(fp);
-printf("Coefficients has been read from coefficient.txt file.\n");
-printf("Printing the graph of x = %d * y *y + %d * y + %d.\n ",a,b,c);
-for(y = 16; y >= -15; y--)
-{
-    for(x = -55;x < 55; x++)
+    int start,flag;
+    srand(time(NULL));
+    int x1c=1,x1r=1,x2c=3,x2r=3; // starting coordinates 
+    printMap(x1c,x1r,x2c,x2r);
+    int nextstep;  //   dice value
+    int control = 0; //  control: controls condition
+    int rightx1=1,leftx1=0,downx1=0,upx1=0; // controls right,left,down,up for Player 1
+    int rightx2=1,leftx2=0,downx2=0,upx2=0; // controls right,left,down,up for Player 2 
+    int diceturn; 
+    do
     {
-                 if((x == (a*y*y) + b*y + c ) && y == 5 && x>0)   // A space was left at y=5 to prevent the graph from slipping.
-                   {
-                   red();
-                   printf(" #");
-                   reset();
-                    }
-                else if((x == (a*y*y) + b*y + c ) && y == 10 && x>0)  // A space was left at y=10 to prevent the graph from slipping.
-                    {
-                     red();
-                     printf(" #");
-                     reset();
-                     }
-                else if((x == (a*y*y) + b*y + c ) && y == 15 && x>0)   //  A space was left at y=15 to prevent the graph from slipping.
-                 {
-                   red();
-                  printf(" #");
-                    reset();
-                    }
-                   else if((x == (a*y*y) + b*y + c ) && y == 16 && x>0)   //  A space was left at y=15 to prevent the graph from slipping.
-                 {
-                   red();
-                  printf("  #");
-                    reset();
-                    }
-                else if((x == (a*y*y) + b*y + c ) && y == -10 && x<0)   // A space was left at y=-10 to prevent the graph from slipping.
-                   {
-                       red();
-                      printf(" \b#");
-                      reset();
-                       }
-                else if((x == (a*y*y) + b*y + c ) && y == -15 && x<0)    // // A space was left at y=-15 to prevent the graph from slipping.
-                  {
-                  red();
-                 printf(" \b#");
-                  reset();
-                   }
-                  else if((x == (a*y*y) + b*y + c ) && y == -5 && x<0)  // A space was left at y=-5 to prevent the graph from slipping.
-                   {
-                       red();
-                      printf(" \b#");
-                      reset();
-                       }
-                else if(x == (a*y*y) + b*y + c )
-                   {
-                  red();
-                  printf("#");
-                  reset();
-                    }
-                                    else if(y == 16 && x == 0)
-                   {
-               cyan();
-               printf("^");
-               reset();
-                   }
-                else if(x == -1 && y == -1)      // y-axis numbers are printed based on the character value of the numbers
-                    {
-                    cyan();
-                     printf("0");
-                    reset();
-                    }
-                else if (x == -1 && y == 5 )    
-                 {
-                    cyan();
-                    printf("%d|",y);
-                     reset();
-                       }
-                else if (x == -2 && y == 10)     
-                    {
-                    cyan();
-                    printf("%d|",y);
-                     reset();
-                       }
-                else if (x == -2 && y == 15)     
-                    {
-                    cyan();
-                    printf("%d|",y);
-                     reset();
-                       }
-                else if (x == -2 && y == -5)      
-                   {
-                    cyan();
-                    printf("%d|",y);
-                     reset();
-                       }
-                else if (x == -3 && y == -10)      
-                    {
-                    cyan();
-                    printf("%d|",y);
-                     reset();
-                       }
-                else if (x == -3 && y == -15)        // y-axis numbers are printed based on the character value of the numbers
-                    {
-                    cyan();
-                    printf("%d|",y);
-                     reset();
-                       }
-                else if (x == 1 && y == 5 )           // unnecessary characters are deleted so that previously printed characters do not conflict
-                    printf("\b");
-                else if (x == 2 && y == 10)
-                    printf("\b\b");
-                else if (x == 2 && y == 15)
-                    printf("\b\b");
-                 else if (x == 2 && y == 16)
-                    printf("\b\b");
-                else if (x == 2 && y == -5)
-                    printf("\b\b");
-                else if (x == 3 && y == -10)
-                    printf("\b\b\b");
-                else if (x == 3 && y == -15)
-                    printf("\b\b\b");                 // unnecessary characters are deleted so that previously printed characters do not conflict
-                else if (x == 0)                     // y axis printed
-                  {
-                   cyan();
-                  printf("|");
-                     reset();
-                    }
-                else                              // x axis printed
-                {
-                  yellow();
-                   printf(y == 0 ? "-" : " ");
-                    reset();
-                }
-         }
-    printf("\n");
-}
-}
-if(choice == 3)
-{
-int a,b,c;
-FILE *fp = fopen("coefficients.txt","r+");
-fscanf(fp,"%d %d %d ",&a,&b,&c);
-fclose(fp);
-printf("Coefficients has been read from coefficient file.\n");
-printf("The graph of x = %d * y * + %d * y + %d\n",a,b,c);
-FILE *fp1 = fopen("graph.txt","w+");
-fprintf(fp1,"cordinat_plane(a,b,c)");
-}
-if(choice != 1 && choice != 2 && choice != 3 && choice != 4)
-{
-    printf("Please enter a valid number[0-4]\n");
-}
-}while(choice != 4);
+        diceturn = startGame();
+        if(diceturn == 0)
+            printf("Same dice value... Please try again.\n");
+        else if(diceturn == 1)
+            printf("***Player 1 will start the game...***\n");
+        else 
+            printf("***Player 2 will start the game...***\n");
+    } while (diceturn == 0);
 
+    while( !(x1c == 1 && x1r == 2) && !(x2c == 3 && x2r == 4) ) // controls if the game end
+    {
+
+        if(x1c ==28 && x1r == 1) // Down Player 1
+        {
+            downx1=1;
+            leftx1=0;
+            rightx1=0;
+            upx1=0;
+        }
+        else if( x1c == 28 && x1r == 13) // Left Player 1
+        {
+            downx1=0;
+            leftx1=1;
+            rightx1=0;
+            upx1=0;
+        }
+        else if(x1c == 1 && x1r == 13) // Up Player 1
+        {
+            downx1=0;
+            leftx1=0;
+            rightx1=0;
+            upx1=1;
+        }
+        
+        if(x2c == 26 && x2r == 3) // Down Player 2
+        {
+            downx2 =1;
+            leftx2 = 0;
+            rightx2 = 0;
+            upx2 = 0;
+        }
+        else if(x2c  == 26 && x2r == 11)// Left Player 2
+        {
+            downx2 =0;
+            leftx2 = 1;
+            rightx2 = 0;
+            upx2 = 0;
+        }
+        else if(x2c == 3 && x2r == 11) // Up Player 2
+        {
+            downx2 =0;
+            leftx2 = 0;
+            rightx2 = 0;
+            upx2 = 1;
+        }
+
+        if(diceturn == 1)
+        {
+            if(rightx1)
+            {
+                green();
+                printf("Player 1... press ENTER to dice");
+                reset();
+                while( getchar() != '\n' );
+                nextstep = dice();
+                green();
+                printf("DICE : %d\n",nextstep);
+                reset();
+                x1c += nextstep;
+                if(x1c >28)
+                {
+                    x1c =28;
+                }
+                if( (x1c == 14) && (x1r == 1) ) x1c -=2;  // Controls penalty points
+            }
+            else if(downx1)
+            {
+                green();
+                printf("Player 1... press ENTER to dice");
+                reset();
+                while( getchar() != '\n' );
+                nextstep = dice();
+                green();
+                printf("DICE : %d\n",nextstep);
+                reset();
+                x1r += nextstep;
+                if(x1r >13)
+                {
+                    x1r =13;
+                }
+
+                if( (x1c == 28) && (x1r == 7) ) x1r-=2; // Controls penalty points
+            }
+            else if(leftx1)
+            {
+                green();
+                printf("Player 1... press ENTER to dice");
+                reset();
+                while( getchar() != '\n' );
+                nextstep = dice();
+                green();
+                printf("DICE : %d\n",nextstep);
+                reset();
+                x1c -= nextstep;
+                if(x1c <1)
+                {
+                    x1c =1;
+                }
+
+                if((x1c == 14 ) && (x1r == 13 )) x1c+= 2; 
+            }
+            else if(upx2)
+            {
+                green();
+                printf("Player 1... press ENTER to dice");
+                reset();
+                while( getchar() != '\n' );
+                nextstep = dice();
+                green();
+                printf("DICE : %d\n",nextstep);
+                reset();
+                x1r -= nextstep;
+                if(x1r <2)
+                {
+                    x1r =2;
+                }
+            }
+            diceturn +=1;
+            control +=1;
+        }
+        else if(diceturn == 2)
+        {
+            if(rightx2)
+            {
+                yellow();
+                printf("Player 2... press ENTER to dice");
+                reset();
+                while( getchar() != '\n' );
+                nextstep = dice();
+                yellow();
+                printf("DICE : %d\n",nextstep);
+                reset();
+                x2c += nextstep;
+                if(x2c >26)
+                {
+                    x2c =26;
+                }
+                if(((x2c == 10 ) && (x2r == 3 )) || ((x2c == 18 ) && (x2r == 3 ) )) x2c -=2;  // Controls penalty points
+            }
+            else if(downx2)
+            {
+                yellow();
+                printf("Player 2... press ENTER to dice");
+                reset();
+                while( getchar() != '\n' );
+                nextstep = dice();
+                yellow();
+                printf("DICE : %d\n",nextstep);
+                reset();
+                x2r += nextstep;
+                if(x2r >11)
+                {
+                    x2r =11;
+                }
+
+                if(((x2c == 26 ) && (x2r == 5 )) || ((x2c == 26 ) && (x2r == 10 ) )) x2r -=2;  // Controls penalty points
+            }
+            else if(leftx2)
+            {
+                yellow();
+                printf("Player 2... press ENTER to dice");
+                reset();
+                while( getchar() != '\n' );
+                nextstep = dice();
+                yellow();
+                printf("DICE : %d\n",nextstep);
+                reset();
+                x2c -= nextstep;
+                if(x2c < 3)
+                {
+                    x2c =3;
+                }
+
+                if(((x2c == 10 ) && (x2r == 11 )) || ((x2c == 18 ) && (x2r == 11 ) )) x2c -=2;  // Controls penalty points
+            }
+            else if(upx2)
+            {
+                yellow();
+                printf("Player 2... press ENTER to dice");
+                reset();
+                while( getchar() != '\n' );
+                nextstep = dice();
+                yellow();
+                printf("DICE : %d\n",nextstep);
+                reset();
+                x2r -= nextstep;
+                if(x2r <4)
+                {
+                    x2r =4;
+                }
+            }
+            control +=1;
+            diceturn -=1;
+        }
+        if(x1c == 1 && x1r ==2) // İf Player 1 on the end point
+        {
+            green();
+            printf("\n\nPlayer 1 WON!!!\n");
+            reset();
+        }
+        if(x2c == 3 && x2r == 4) // İf Player 2 on the end point
+        {
+            yellow();
+            printf("\n\nPlayer 2 WON !!!\n");
+            reset();
+        }
+
+        if(control ==2 || (x1c == 1 && x1r ==2) || (x2c == 3 && x2r == 4)) // Prints map according to 2 dice and end points
+        {
+            printMap(x1c,x1r,x2c,x2r);
+            control =0;
+        }
+    }
     return 0;
 }
